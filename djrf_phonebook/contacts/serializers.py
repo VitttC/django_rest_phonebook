@@ -1,6 +1,13 @@
 from rest_framework import serializers
+from django.contrib.auth.models import User
 
 from contacts.models import Contact
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    
+    class Meta:
+        model = User
+        fields = ['url', 'id', 'username', 'contacts']
 
 
 class ContactSerializer(serializers.ModelSerializer):
@@ -13,7 +20,7 @@ class ContactSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contact
-        fields = ['id', 'first_name', 'last_name', 'country_code', 'phone_number']
+        fields = ['url','id', 'first_name', 'last_name', 'country_code', 'phone_number']
 
     def create(self, validated_data):
         """
