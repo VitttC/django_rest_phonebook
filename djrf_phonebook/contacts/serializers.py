@@ -12,15 +12,16 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class ContactSerializer(serializers.ModelSerializer):
     """
-    Expliciting which fields are required
+    Expliciting which fields are required and which can be left blank.
     """
-    owner = serializers.ReadOnlyField(source='owner.username')
     first_name =   serializers.CharField(required=True, allow_blank=False, max_length=30)
     phone_number = serializers.CharField(required=True, allow_blank=False, max_length=10)
+    owner =        serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Contact
-        fields = ['url','id', 'first_name', 'last_name', 'country_code', 'phone_number', 'owner']
+        fields = ['url','id', 'first_name', 'last_name',
+                  'country_code', 'phone_number', 'owner']
 
     def create(self, validated_data):
         """
@@ -32,8 +33,8 @@ class ContactSerializer(serializers.ModelSerializer):
         """
         Update and return an existing "Contact" instance.
         """
-        instance.first_name = validated_data.get('first_name', instance.first_name)
-        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.first_name =   validated_data.get('first_name', instance.first_name)
+        instance.last_name =    validated_data.get('last_name', instance.last_name)
         instance.country_code = validated_data.get('country_code', instance.country_code)
         instance.phone_number = validated_data.get('phone_number', instance.phone_number)   
         instance.save()
