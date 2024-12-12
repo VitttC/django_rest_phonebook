@@ -20,7 +20,7 @@ class ContactSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Contact
-        fields = ['url','id', 'first_name', 'last_name', 'country_code', 'phone_number']
+        fields = ['url','id', 'first_name', 'last_name', 'country_code', 'phone_number', 'owner']
 
     def create(self, validated_data):
         """
