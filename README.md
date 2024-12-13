@@ -9,7 +9,7 @@
 
  If not logged in ReadOnly mode is shown so only GET method is allowed.
  To log in I added two users:
-	-admin0 psw=usr
-	-admin1 psw=usr
+	-admin0 psw=admin0
+	-admin1 psw=admin1
 
  There's no duplicate control, yet.
